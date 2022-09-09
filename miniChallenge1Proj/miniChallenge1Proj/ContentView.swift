@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
+    let screenW = UIScreen.main.bounds.size.width
+    let screenH = UIScreen.main.bounds.size.height
     @State var offset: CGFloat = 0
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
@@ -31,8 +33,8 @@ struct ContentView: View {
                     Image(systemName: "location").frame(width: 40.0, height: 40.0).background(.white).foregroundColor(.gray).cornerRadius(5)
                 }
                 
-            }.position(x: 365, y: 75)
-                    
+            }.position(x: screenW * 0.93, y: screenH * 0.1)
+            
             GeometryReader {
                 reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 60)
                     .offset(y: offset)
@@ -83,15 +85,38 @@ struct ContentView: View {
     struct BottomSheet : View {
         @State var text = ""
         var body : some View {
-            ZStack {
-                Capsule()
-                    .fill(Color(white: 0.81))
-                    .frame( width:50,height:5).padding(.bottom,70)
-                RoundedRectangle(cornerRadius: 20).frame(width: .infinity , height: 40).foregroundColor(Color(.init(srgbRed: 235, green: 235, blue: 240, alpha: 0.7)))
-                TextField("Pesquisar" , text : $text ).frame(width: 300).padding()
-            }.padding(.horizontal,10).padding(.bottom,500).padding(.top,10).background(BlurShape()).ignoresSafeArea()
             
-
+            
+            ZStack {
+                
+                VStack{
+                    
+                    Capsule()
+                        .fill(Color(white: 0.81))
+                        .frame( width:50,height:5)
+                    
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        TextField("Pesquisar" , text: $text).padding(.horizontal, 20).frame(width: .infinity, height: 40).font(.system(size: 15))
+                            .background(.white)
+                            .cornerRadius(10)
+                        
+                    }.padding(.horizontal, 20).padding(.top, 5)
+//                    .frame(width: .infinity , height: 40).foregroundColor(Color(.init(srgbRed: 235, green: 235, blue: 240, alpha: 0.9)))
+                    List {
+                        Section (header: Text("Proximos")) {
+                            Text("A List Item")
+                            Text("A Second List Item")
+                            Text("A Third List Item")
+                        }
+                       
+                    }.background(BlurShape()).listStyle(.insetGrouped)
+                }
+            }.padding(.top,10)
+                .background(BlurShape())
+                .ignoresSafeArea()
+            
+            
         }
     }
     
@@ -100,18 +125,25 @@ struct ContentView: View {
             return UIVisualEffectView (effect : UIBlurEffect ( style: .systemMaterial))
         }
         func updateUIView (_ uiView: UIVisualEffectView, context: Context) {
+        }
+        
     }
     
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            
-            ContentView()
-                .previewInterfaceOrientation(.portrait)
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            Group {
+                
+                ContentView()
+                    .previewInterfaceOrientation(.portrait)
+            }
         }
     }
 }
-}
 
+//                    ZStack {
+//                        RoundedRectangle(cornerRadius: 5).frame(width: 350 , height: 40).foregroundColor(Color(.init(srgbRed: 235, green: 235, blue: 240, alpha: 0.9)))
+//                        TextField("Pesquisar" , text : $text ).frame(width: 300, height: 40)
+//                        Image.init(systemName: "Done")
+//
+//
+//                        }.padding(.bottom,500).background(BlurShape())
