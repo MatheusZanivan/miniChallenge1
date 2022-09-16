@@ -5,10 +5,18 @@
 //  Created by Vinicius Gomes on 05/09/22.
 //
 
+import Combine
 import SwiftUI
 import MapKit
 
 struct ContentView: View {
+    
+    @StateObject private var viewModel = ContentViewModel()
+    @StateObject var deviceLocationService = DeviceLocationService.shared
+    
+    @State var tokens: Set<AnyCancellable> = []
+    @State var coordinates: (lat: Double, lon: Double) = (0,0)
+    
     let screenW = UIScreen.main.bounds.size.width
     let screenH = UIScreen.main.bounds.size.height
     //mostra sheet view
@@ -17,15 +25,17 @@ struct ContentView: View {
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
     
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
-        span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
-    )
+//    @State private var region = MKCoordinateRegion(
+//        center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
+//        span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
+//    )
     var body: some View {
         
         ZStack {
-            Map(coordinateRegion: $region)
+            Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true)
                 .ignoresSafeArea()
+            
+        
             Button(action: {
                 isShowingSheet = true
                 
@@ -44,16 +54,16 @@ struct ContentView: View {
                 
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
-            Button {
-                
-            } label: {
+            Button(action:  {
+                viewModel.requestAllowOnceLocationPermission()
+            },label: {
                 Label {
                     Text("")
                 } icon: {
                     Image(systemName: "location").frame(width: 40.0, height: 40.0).background(.white).foregroundColor(.gray).cornerRadius(5)
                 }
                 
-            }.position(x: screenW * 0.93, y: screenH * 0.1)
+            }).position(x: screenW * 0.93, y: screenH * 0.1)
             
             GeometryReader {
                 reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 60)
@@ -94,6 +104,10 @@ struct ContentView: View {
                         }
                         
                     }))
+            }.onAppear {
+                observeCoordinateUpdates()
+                observeLocationAccessDenied()
+                deviceLocationService.requestLocationUpdates()
             }
             
             
@@ -104,6 +118,30 @@ struct ContentView: View {
     func didDismiss() {
         // Handle the dismissing action.
     }
+    //Verifica se existe erro e Atualiza as coordenadas
+    func observeCoordinateUpdates(){
+        deviceLocationService.coordinatesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    print(error)
+                }
+            } receiveValue: { coordinates in
+                self.coordinates = (coordinates.latitude, coordinates.longitude)
+            }
+            .store(in: &tokens)
+    }
+    
+    func observeLocationAccessDenied() {
+        deviceLocationService.deniedLocationAcessPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {
+                print("Show some kind of alert to the user")
+            }
+            .store(in: &tokens)
+    }
+    
+}
     struct ShowLicenseAgreement: View {
         let screenW = UIScreen.main.bounds.size.width
         let screenH = UIScreen.main.bounds.size.height
@@ -121,8 +159,7 @@ struct ContentView: View {
         }
     }
     
-    
-}
+
 
 
 struct BottomSheet : View {
@@ -137,17 +174,11 @@ struct BottomSheet : View {
                 Capsule()
                     .fill(Color(white: 0.81))
                     .frame( width:50,height:5)
-                
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("Pesquisar" , text: $text).padding(.horizontal, 20).frame(width: .infinity, height: 40).font(.system(size: 15))
-                        .background(.white)
-                        .cornerRadius(10)
-                    
-                }.padding(.horizontal, 20).padding(.top, 5)
                 List {
                     Section (header: Text("Proximos")) {
-                        Text("A List Item")
+                        Button("A List Item") {
+                            
+                        }.foregroundColor(.black)
                         Text("A Second List Item")
                         Text("A Third List Item")
                     }

@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		556A5F8E28CFD24B00F89EC6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556A5F8D28CFD24B00F89EC6 /* LocationManager.swift */; };
 		556A5F9228CFE9EC00F89EC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556A5F9128CFE9EB00F89EC6 /* ContentView.swift */; };
+		55EC1A5328D4FA140024B1C4 /* DeviceLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC1A5228D4FA130024B1C4 /* DeviceLocationService.swift */; };
+		55EC1A5528D4FECA0024B1C4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC1A5428D4FECA0024B1C4 /* ContentViewModel.swift */; };
 		F60BF3F228AEC3230063E21A /* miniChallenge1ProjApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */; };
 		F60BF3F628AEC3260063E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60BF3F528AEC3260063E21A /* Assets.xcassets */; };
 		F60BF3F928AEC3260063E21A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60BF3F828AEC3260063E21A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		556A5F8D28CFD24B00F89EC6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		556A5F9128CFE9EB00F89EC6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		55EC1A5228D4FA130024B1C4 /* DeviceLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationService.swift; sourceTree = "<group>"; };
+		55EC1A5428D4FECA0024B1C4 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		F60BF3EE28AEC3230063E21A /* miniChallenge1Proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniChallenge1Proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniChallenge1ProjApp.swift; sourceTree = "<group>"; };
 		F60BF3F528AEC3260063E21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +57,8 @@
 			children = (
 				F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */,
 				556A5F9128CFE9EB00F89EC6 /* ContentView.swift */,
-				556A5F8D28CFD24B00F89EC6 /* LocationManager.swift */,
+				55EC1A5228D4FA130024B1C4 /* DeviceLocationService.swift */,
+				55EC1A5428D4FECA0024B1C4 /* ContentViewModel.swift */,
 				F60BF3F528AEC3260063E21A /* Assets.xcassets */,
 				F60BF3F728AEC3260063E21A /* Preview Content */,
 			);
@@ -140,9 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EC1A5528D4FECA0024B1C4 /* ContentViewModel.swift in Sources */,
 				F60BF3F228AEC3230063E21A /* miniChallenge1ProjApp.swift in Sources */,
 				556A5F9228CFE9EC00F89EC6 /* ContentView.swift in Sources */,
-				556A5F8E28CFD24B00F89EC6 /* LocationManager.swift in Sources */,
+				55EC1A5328D4FA140024B1C4 /* DeviceLocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
