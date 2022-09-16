@@ -36,5 +36,6 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print (error.localizedDescription)
+        print("choreta")
    }
 }

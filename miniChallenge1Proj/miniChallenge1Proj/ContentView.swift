@@ -25,17 +25,17 @@ struct ContentView: View {
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
     
-//    @State private var region = MKCoordinateRegion(
-//        center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
-//        span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
-//    )
+    //    @State private var region = MKCoordinateRegion(
+    //        center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
+    //        span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
+    //    )
     var body: some View {
         
         ZStack {
             Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true)
                 .ignoresSafeArea()
             
-        
+            
             Button(action: {
                 isShowingSheet = true
                 
@@ -142,25 +142,23 @@ struct ContentView: View {
     }
     
 }
-    struct ShowLicenseAgreement: View {
-        let screenW = UIScreen.main.bounds.size.width
-        let screenH = UIScreen.main.bounds.size.height
-        var body: some View {
-            VStack {
-                Text("Licenças e Termos")
-                    .font(.title).position(x: screenH * 0.23, y: screenW * 0.3)
-                Text("Todos os dados usados nesse aplicativo referente as localizações das ciclofaixas e ciclovias estão reservados e disponiveis nas plataformas OpenSources.").multilineTextAlignment(.center)
-            }.padding(.leading,10).padding(.trailing,10).frame(height: 250)
-            HStack {
-                Link( "©CicloMap", destination: URL(string: "https://ciclomapa.org.br")!)
-                Link( "©OpenStreetMap", destination: URL(string: "https://www.openstreetmap.org/about/")!)
-                
-            }.padding(50)
-        }
+
+struct ShowLicenseAgreement: View {
+    let screenW = UIScreen.main.bounds.size.width
+    let screenH = UIScreen.main.bounds.size.height
+    var body: some View {
+        VStack {
+            Text("Licenças e Termos")
+                .font(.title).position(x: screenH * 0.23, y: screenW * 0.3)
+            Text("Todos os dados usados nesse aplicativo referente as localizações das ciclofaixas e ciclovias estão reservados e disponiveis nas plataformas OpenSources.").multilineTextAlignment(.center)
+        }.padding(.leading,10).padding(.trailing,10).frame(height: 250)
+        HStack {
+            Link( "©CicloMap", destination: URL(string: "https://ciclomapa.org.br")!)
+            Link( "©OpenStreetMap", destination: URL(string: "https://www.openstreetmap.org/about/")!)
+            
+        }.padding(50)
     }
-    
-
-
+}
 
 struct BottomSheet : View {
     @State var text = ""
@@ -183,11 +181,10 @@ struct BottomSheet : View {
                         Text("A Third List Item")
                     }
                     
-                }.background(BlurShape()).listStyle(.insetGrouped)
+                }.listStyle(.insetGrouped)
             }
         }.padding(.top,10)
-            .background(BlurShape())
-            .ignoresSafeArea()
+            .ignoresSafeArea().background(Color(.init(red: 0.949, green: 0.949, blue: 0.969, alpha: 1)))
         
         
     }
