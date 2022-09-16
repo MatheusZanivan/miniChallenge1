@@ -7,18 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		556A5F8E28CFD24B00F89EC6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556A5F8D28CFD24B00F89EC6 /* LocationManager.swift */; };
-		556A5F9228CFE9EC00F89EC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556A5F9128CFE9EB00F89EC6 /* ContentView.swift */; };
 		F60BF3F228AEC3230063E21A /* miniChallenge1ProjApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */; };
+		F60BF3F428AEC3230063E21A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF3F328AEC3230063E21A /* ContentView.swift */; };
 		F60BF3F628AEC3260063E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60BF3F528AEC3260063E21A /* Assets.xcassets */; };
 		F60BF3F928AEC3260063E21A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60BF3F828AEC3260063E21A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		556A5F8D28CFD24B00F89EC6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		556A5F9128CFE9EB00F89EC6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F60BF3EE28AEC3230063E21A /* miniChallenge1Proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniChallenge1Proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniChallenge1ProjApp.swift; sourceTree = "<group>"; };
+		F60BF3F328AEC3230063E21A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F60BF3F528AEC3260063E21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F60BF3F828AEC3260063E21A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,8 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */,
-				556A5F9128CFE9EB00F89EC6 /* ContentView.swift */,
-				556A5F8D28CFD24B00F89EC6 /* LocationManager.swift */,
+				F60BF3F328AEC3230063E21A /* ContentView.swift */,
 				F60BF3F528AEC3260063E21A /* Assets.xcassets */,
 				F60BF3F728AEC3260063E21A /* Preview Content */,
 			);
@@ -140,9 +137,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F60BF3F428AEC3230063E21A /* ContentView.swift in Sources */,
 				F60BF3F228AEC3230063E21A /* miniChallenge1ProjApp.swift in Sources */,
-				556A5F9228CFE9EC00F89EC6 /* ContentView.swift in Sources */,
-				556A5F8E28CFD24B00F89EC6 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +272,6 @@
 				DEVELOPMENT_TEAM = 55AU2SQW7Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow your location ?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -306,7 +301,6 @@
 				DEVELOPMENT_TEAM = 55AU2SQW7Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow your location ?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
