@@ -11,7 +11,13 @@ import MapKit
 import CoreLocation
 
 struct ContentView: View {
+<<<<<<< HEAD
 
+=======
+    
+    var cicloviaSP: Ciclo = Ciclo.ciclovias
+    
+>>>>>>> 11fbea318fc57b10ac05eb93d46d915861cd094e
     @StateObject private var viewModel = ContentViewModel()
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
@@ -210,13 +216,13 @@ struct BlurShape: UIViewRepresentable {
     
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            
-            ContentView()
-                .previewInterfaceOrientation(.portrait)
-        }
-    }
-}
-
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//
+//            ContentView()
+//                .previewInterfaceOrientation(.portrait)
+//        }
+//    }
+//}
+//
