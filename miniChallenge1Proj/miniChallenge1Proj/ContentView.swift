@@ -8,9 +8,10 @@
 import Combine
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct ContentView: View {
-   // @StateObject  var json = overlayer()
+
     @StateObject private var viewModel = ContentViewModel()
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
@@ -71,6 +72,10 @@ struct ContentView: View {
             
             Button(action:  {
                 viewModel.requestAllowOnceLocationPermission()
+//                else {
+//                    //fazer notificacao ->
+//                    print("asd")
+//                }
             },label: {
                 Label {
                     Text("")
@@ -79,16 +84,15 @@ struct ContentView: View {
                 }
                 
             }).position(x: screenW * 0.93, y: screenH * 0.1)
-            
             GeometryReader {
-                reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 60)
+                reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 90)
                     .offset(y: offset)
                     .gesture(DragGesture().onChanged({
                         (value) in withAnimation {
                             translation = value.translation
                             location = value.location
                             if value.startLocation.y > reader.frame(in: .global).minX {
-                                if value.translation.height < 0 && offset > (-reader.frame(in: .global).height + 60) {
+                                if value.translation.height < 0 && offset > (-reader.frame(in: .global).height + 10) {
                                     offset = value.translation.height
                                 }
                             }
@@ -110,11 +114,9 @@ struct ContentView: View {
                             }
                             else if value.startLocation.y < reader.frame(in: .global).minX {
                                 if -value.translation.height < reader.frame(in: .global).minX {
-                                    offset = (-reader.frame(in: .global).height + 60 )
+                                    offset = (-reader.frame(in: .global).height - 60 )
                                     return
                                 }
-                                
-                                
                             }
                         }
                         
@@ -123,7 +125,13 @@ struct ContentView: View {
                 observeCoordinateUpdates()
                 observeLocationAccessDenied()
                 deviceLocationService.requestLocationUpdates()
+
+                let firsLocation = CLLocation(latitude:coordinates.lat, longitude: coordinates.lon)
+                let secondLocation = CLLocation(latitude: -23.6825, longitude: -46.6885)
                 
+                let distance = String(firsLocation.distance(from: secondLocation) / 10000)
+                print(distance)
+
             }
             
             
@@ -183,25 +191,24 @@ struct BottomSheet : View {
         
         
         ZStack {
-            
             VStack{
-                
                 Capsule()
                     .fill(Color(white: 0.81))
                     .frame( width:50,height:5)
                 List {
-                    Section (header: Text("Proximos")) {
+                    Section (header: Text("Ciclovias & Ciclofaixas")) {
                         Button("A List Item") {
-                            
                         }.foregroundColor(.black)
-                        Text("A Second List Item")
-                        Text("A Third List Item")
+                        Button("A Second List Item") {
+                        }.foregroundColor(.black)
+                        Button("Another List Item") {
+                        }.foregroundColor(.black)
                     }
                     
                 }.listStyle(.insetGrouped)
             }
         }.padding(.top,10)
-            .ignoresSafeArea().background(Color(.init(red: 0.949, green: 0.949, blue: 0.969, alpha: 1)))
+            .ignoresSafeArea().background(Color(.init(red: 0.949, green: 0.949, blue: 0.975, alpha: 1)))
         
         
     }
@@ -216,13 +223,13 @@ struct BlurShape: UIViewRepresentable {
     
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//
-//            ContentView()
-//                .previewInterfaceOrientation(.portrait)
-//        }
-//    }
-//}
-//
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+
+            ContentView()
+                .previewInterfaceOrientation(.portrait)
+        }
+    }
+}
+
