@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 import MapKit
+//import UIKit
+
 
 // MARK: - Welcome
 struct Ciclo: Codable {
@@ -54,53 +56,64 @@ enum PropertiesType: String, Codable {
 enum FeatureType: String, Codable {
     case feature = "Feature"
 }
-//
+////
 struct MapOverlayer {
     var overlay: MKOverlay
-    var polygonInfo: Ciclo
+    var polylineInfo: Ciclo
 }
 //guardando a forma overlay
 class MapOverlays {
-    
+
     private var overlayList = [MapOverlayer]()
     static var shared = MapOverlays()
-    
+
     func addOverlay(mapOverlayer: MapOverlayer) {
         MapOverlays.shared.overlayList.append(mapOverlayer)
     }
     func returnOverlay() -> [MapOverlayer] {
         return MapOverlays.shared.overlayList
     }
+    //func pra renderizar para ser usada na funcao de load(decode)
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.lineWidth = 5
+            renderer.strokeColor = UIColor.blue
+            
+            return renderer
+        }
+      
+        return MKOverlayRenderer.init()
+        }
 }
 
 
-class Overlayer {
-    var polygonInfo: Ciclo
+class overlayer {
+    static var shared = overlayer(polylineInfo: Ciclo.init(features: [Feature.init(type: FeatureType.feature, properties: Properties.init(name: "", id: "", type: PropertiesType.ciclovia), geometry: Geometry.init(type: GeometryType.lineString, coordinates: [[0.0]]))]))
+    
+    var polylineInfo : Ciclo
 
-    init(polygonInfo: Ciclo) {
-    self.polygonInfo = polygonInfo
+    init(polylineInfo: Ciclo) {
+    self.polylineInfo = polylineInfo
  }
 
-func changePolygon(newPolygon: Ciclo) {
-    self.polygonInfo = newPolygon
+func changePolyline(newPolyline: Ciclo) {
+    self.polylineInfo = newPolyline
  }
 }
-
-
-//func pra renderizar para ser usada na funcao de load(decode)
-func render(_overlay: MKOverlay, info: Any?) {
-    /*if let polygonInfo = info as? Ciclo {
-        Overlayer.shared.changePolygon(newPolygon: polygonInfo)
-    }
-    let newMapOverlay = MapOverlayer(overlay: _overlay, polygonInfo: Overlayer.shared.polygonInfo)
-    MapOverlays.shared.addOverlay(mapOverlayer: newMapOverlay)
-    */
-}
-
 
 // Extension to decode JSON locally
 extension Bundle {
-    
+    // pra renderizar
+    func render(overlay: MKOverlay, info: Any?) {
+        if let polylineInfo = info as? Ciclo {
+            overlayer.shared.changePolyline(newPolyline: polylineInfo)
+        }
+        let newMapOverlay = MapOverlayer(overlay: overlay, polylineInfo: overlayer.shared.polylineInfo)
+        MapOverlays.shared.addOverlay(mapOverlayer: newMapOverlay)
+        
+    }
+    // funcao completa para carregar, ler e desenhar a Forma de polyline
     func decode<T: Decodable>(file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {
             fatalError("Could not find in bundle.")
@@ -117,17 +130,27 @@ extension Bundle {
         }
         print(loadedData)
         
-//        for item in geoJson {
-//            if let feature = item as? MKGeoJSONFeature {
-//                let geometry = feature.geometry.first
-//                let propData = feature.properties!
-//                if let polyline = geometry as? MKPolyline {
-//                    let polylineInfo = try? JSONDecoder.init().decode(Ciclo.self, from: propData)
-//                }
-//            }
-//        }
-////
+        for item in geoJson {
+            if let feature = item as? MKGeoJSONFeature {
+                let geometry = feature.geometry.first
+                let propData = feature.properties!
+                if let polyline = geometry as? MKPolyline {
+                    let polylineInfo = try? JSONDecoder.init().decode(Ciclo.self, from: propData)
+                    //call render function pra forma
+                    self.render(overlay: polyline, info: polylineInfo)
+                }
+                for geo in feature.geometry {
+                    if let polyline = geo as? MKPolyline {
+                        overlays.append(polyline)
+                    }
+                }
+                
+            }
+        }
+//
         return loadedData
     }
+    
+    
 }
 

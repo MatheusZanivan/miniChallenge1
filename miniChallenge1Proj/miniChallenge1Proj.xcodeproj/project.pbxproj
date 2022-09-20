@@ -12,6 +12,7 @@
 		55EC1A5528D4FECA0024B1C4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC1A5428D4FECA0024B1C4 /* ContentViewModel.swift */; };
 		6B394E0728D514E500B21E02 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B394E0628D514E500B21E02 /* JSONManager.swift */; };
 		6BB7F96328D5185400AF59BC /* cicloviassp.json in Resources */ = {isa = PBXBuildFile; fileRef = 6BB7F96228D5185400AF59BC /* cicloviassp.json */; };
+		6BB7F98128DA5A1000AF59BC /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB7F98028DA5A1000AF59BC /* MapView.swift */; };
 		F60BF3F228AEC3230063E21A /* miniChallenge1ProjApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */; };
 		F60BF3F628AEC3260063E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60BF3F528AEC3260063E21A /* Assets.xcassets */; };
 		F60BF3F928AEC3260063E21A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F60BF3F828AEC3260063E21A /* Preview Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		55EC1A5428D4FECA0024B1C4 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		6B394E0628D514E500B21E02 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		6BB7F96228D5185400AF59BC /* cicloviassp.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cicloviassp.json; sourceTree = "<group>"; };
+		6BB7F98028DA5A1000AF59BC /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F60BF3EE28AEC3230063E21A /* miniChallenge1Proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniChallenge1Proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60BF3F128AEC3230063E21A /* miniChallenge1ProjApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniChallenge1ProjApp.swift; sourceTree = "<group>"; };
 		F60BF3F528AEC3260063E21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				55EC1A5428D4FECA0024B1C4 /* ContentViewModel.swift */,
 				F60BF3F528AEC3260063E21A /* Assets.xcassets */,
 				F60BF3F728AEC3260063E21A /* Preview Content */,
+				6BB7F98028DA5A1000AF59BC /* MapView.swift */,
 			);
 			path = miniChallenge1Proj;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EC1A5528D4FECA0024B1C4 /* ContentViewModel.swift in Sources */,
+				6BB7F98128DA5A1000AF59BC /* MapView.swift in Sources */,
 				F60BF3F228AEC3230063E21A /* miniChallenge1ProjApp.swift in Sources */,
 				556A5F9228CFE9EC00F89EC6 /* ContentView.swift in Sources */,
 				6B394E0728D514E500B21E02 /* JSONManager.swift in Sources */,

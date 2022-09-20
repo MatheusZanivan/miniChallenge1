@@ -10,11 +10,10 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    
-    var cicloviaSP: Ciclo = Ciclo.ciclovias
-    
+   // @StateObject  var json = overlayer()
     @StateObject private var viewModel = ContentViewModel()
     @StateObject var deviceLocationService = DeviceLocationService.shared
+    
     
     @State var tokens: Set<AnyCancellable> = []
     @State var coordinates: (lat: Double, lon: Double) = (0,0)
@@ -27,17 +26,31 @@ struct ContentView: View {
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
     
-    //    @State private var region = MKCoordinateRegion(
-    //        center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
-    //        span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
-    //    )
+    @State private var lineCoordinates = [
+
+      // Steve Jobs theatre
+      CLLocationCoordinate2D(latitude: -23.6304237, longitude: -46.7380401),
+
+      // Caffè Macs
+      CLLocationCoordinate2D(latitude: -23.6307354, longitude: -46.7377035),
+
+      // Apple wellness center
+      CLLocationCoordinate2D(latitude: -23.631134, longitude:  -46.7372572)
+    ];
+    
+    
+        @State private var region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
+            span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
+        )
     var body: some View {
-        
+    
         ZStack {
-            Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true)
-                .ignoresSafeArea()
             
-            
+            Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true).ignoresSafeArea()
+            MapView(region: region,
+                    lineCoordinates: lineCoordinates)
+          
             Button(action: {
                 isShowingSheet = true
                 
@@ -110,7 +123,9 @@ struct ContentView: View {
                 observeCoordinateUpdates()
                 observeLocationAccessDenied()
                 deviceLocationService.requestLocationUpdates()
+                
             }
+            
             
             
         }
