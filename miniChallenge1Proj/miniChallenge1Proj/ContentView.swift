@@ -11,13 +11,7 @@ import MapKit
 import CoreLocation
 
 struct ContentView: View {
-<<<<<<< HEAD
 
-=======
-    
-    var cicloviaSP: Ciclo = Ciclo.ciclovias
-    
->>>>>>> 11fbea318fc57b10ac05eb93d46d915861cd094e
     @StateObject private var viewModel = ContentViewModel()
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
@@ -62,13 +56,11 @@ struct ContentView: View {
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
             Button(action:  {
-                if viewModel.requestAllowOnceLocationPermission() != nil {
                 viewModel.requestAllowOnceLocationPermission()
-                }
-                else {
-                    //fazer notificacao ->
-                    print("asd")
-                }
+//                else {
+//                    //fazer notificacao ->
+//                    print("asd")
+//                }
             },label: {
                 Label {
                     Text("")
@@ -77,7 +69,6 @@ struct ContentView: View {
                 }
                 
             }).position(x: screenW * 0.93, y: screenH * 0.1)
-            
             GeometryReader {
                 reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 90)
                     .offset(y: offset)
@@ -111,8 +102,6 @@ struct ContentView: View {
                                     offset = (-reader.frame(in: .global).height - 60 )
                                     return
                                 }
-                                
-                                
                             }
                         }
                         
@@ -124,7 +113,7 @@ struct ContentView: View {
                 let firsLocation = CLLocation(latitude:coordinates.lat, longitude: coordinates.lon)
                 let secondLocation = CLLocation(latitude: -23.6825, longitude: -46.6885)
                 
-                let distance = String(firsLocation.distance(from: secondLocation) / 1000)
+                let distance = String(firsLocation.distance(from: secondLocation) / 10000)
                 print(distance)
             }
             
@@ -216,13 +205,13 @@ struct BlurShape: UIViewRepresentable {
     
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//
-//            ContentView()
-//                .previewInterfaceOrientation(.portrait)
-//        }
-//    }
-//}
-//
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+
+            ContentView()
+                .previewInterfaceOrientation(.portrait)
+        }
+    }
+}
+
