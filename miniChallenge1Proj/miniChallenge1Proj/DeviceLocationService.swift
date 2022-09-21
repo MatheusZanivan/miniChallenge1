@@ -49,8 +49,8 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
             deniedLocationAcessPublisher.send()
         }
     }
-    
-    
+    //Requisitando a localizacao do usuario
+ 
     //Obtendo a localizacao
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }

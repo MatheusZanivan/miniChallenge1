@@ -14,6 +14,7 @@ struct ContentView: View {
 
     @StateObject private var viewModel = ContentViewModel()
     @StateObject var deviceLocationService = DeviceLocationService.shared
+  
     
     
     @State var tokens: Set<AnyCancellable> = []
@@ -26,7 +27,17 @@ struct ContentView: View {
     @State var offset: CGFloat = 0
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
+    @State var locationManager = CLLocationManager()
+    @State var showMapAlert = false
     
+//    let ciclo = lineCoordinates["cicloviassp"][0]["Features"].stringValue
+////    let long = lineCoordinates["cicloviassp"][0]["long"].stringValue
+//    CLLocationCoordinate2D(latitude: Double(ciclo)!)
+//    
+// Ciclo -> Feature -> geometry -> Geometry -> coordinates
+    
+    
+    //trazer o array do json para ca
     @State private var lineCoordinates = [
 
       // Steve Jobs theatre
@@ -40,17 +51,19 @@ struct ContentView: View {
     ];
     
     
-        @State private var region = MKCoordinateRegion(
+        @State var region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
-            span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
-        )
+            span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))
     var body: some View {
     
         ZStack {
             
-            Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true).ignoresSafeArea()
-            MapView(region: region,
-                    lineCoordinates: lineCoordinates)
+//            Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true).ignoresSafeArea()
+//
+            MapView(region: region, lineCoordinates: lineCoordinates, locationManager: $locationManager, showMapAlert: $showMapAlert).ignoresSafeArea()
+        
+        
+        
           
             Button(action: {
                 isShowingSheet = true
@@ -71,7 +84,8 @@ struct ContentView: View {
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
             Button(action:  {
-                viewModel.requestAllowOnceLocationPermission()
+
+              viewModel.requestAllowOnceLocationPermission()
 //                else {
 //                    //fazer notificacao ->
 //                    print("asd")
@@ -223,13 +237,13 @@ struct BlurShape: UIViewRepresentable {
     
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-
-            ContentView()
-                .previewInterfaceOrientation(.portrait)
-        }
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//
+//            ContentView()
+//                .previewInterfaceOrientation(.portrait)
+//        }
+//    }
+//}
 

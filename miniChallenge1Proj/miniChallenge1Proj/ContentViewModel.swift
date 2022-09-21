@@ -6,26 +6,28 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     
     //Gerenciador de localização
     let locationManager = CLLocationManager()
-    
-    
+
+
     override init() {
         super.init()
         locationManager.delegate = self
     }
-    
+
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40, longitude: 120), span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100 ))
-    
-    
+
+
     
     //Requisitando a localizacao do usuário
-    func requestAllowOnceLocationPermission() {
+    public func requestAllowOnceLocationPermission() {
         locationManager.requestLocation()
     }
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latesLocation = locations.first else {
             return
+        
         }
         
         DispatchQueue.main.async {
@@ -35,7 +37,6 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print (error.localizedDescription)
-        print("choreta")
+//        print (error.localizedDescription)
    }
 }

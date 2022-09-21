@@ -7,16 +7,24 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct MapView: UIViewRepresentable {
+    //21/09
 
   let region: MKCoordinateRegion
   let lineCoordinates: [CLLocationCoordinate2D]
-
+    
+     @Binding var locationManager: CLLocationManager
+     @Binding var showMapAlert: Bool
+       let mapView = MKMapView()
+    
   func makeUIView(context: Context) -> MKMapView {
-    let mapView = MKMapView()
-    mapView.delegate = context.coordinator
-    mapView.region = region
+      mapView.delegate = context.coordinator
+    locationManager.delegate = context.coordinator
+
+      mapView.region = region
+      
 
     let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
     mapView.addOverlay(polyline)
@@ -24,28 +32,69 @@ struct MapView: UIViewRepresentable {
     return mapView
   }
 
-  func updateUIView(_ view: MKMapView, context: Context) {}
+  func updateUIView(_ view: MKMapView, context: Context) {
+    //  fazendo agora 21/09
+      mapView.showsUserLocation = true
+      mapView.userTrackingMode = .follow
+
+      
+      let coordinate = CLLocationCoordinate2D(latitude:-23.6699, longitude: -46.7012)
+      let span = MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
+      let region = MKCoordinateRegion(center: view.userLocation.location?.coordinate ?? coordinate, span: span)
+      view.setRegion(region, animated: true)
+      print("ola familia")
+
+  }
 
   func makeCoordinator() -> Coordinator {
-    Coordinator(self)
+      return Coordinator(self)
   }
 
 }
 
-class Coordinator: NSObject, MKMapViewDelegate {
+class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
+    
   var parent: MapView
 
   init(_ parent: MapView) {
     self.parent = parent
   }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+          switch status {
+          case .restricted:
+            break
+          case .denied:
+            parent.showMapAlert.toggle()
+            return
+          case .notDetermined:
+              parent.locationManager.requestWhenInUseAuthorization()
+            return
+          case .authorizedWhenInUse:
+            return
+          case .authorizedAlways:
+              parent.locationManager.allowsBackgroundLocationUpdates = true
+              parent.locationManager.pausesLocationUpdatesAutomatically = false
+            return
+          @unknown default:
+            break
+          }
+        parent.locationManager.startUpdatingLocation()
+        }
+    
+  
+       
 
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
+      
     if let routePolyline = overlay as? MKPolyline {
       let renderer = MKPolylineRenderer(polyline: routePolyline)
-      renderer.strokeColor = UIColor.systemBlue
+      renderer.strokeColor = UIColor.systemPurple
       renderer.lineWidth = 10
       return renderer
     }
     return MKOverlayRenderer()
   }
+    
 }
