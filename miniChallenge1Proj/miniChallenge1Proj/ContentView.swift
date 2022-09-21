@@ -28,13 +28,7 @@ struct ContentView: View {
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
     @State var locationManager = CLLocationManager()
-    @State var showMapAlert = false
-    
-//    let ciclo = lineCoordinates["cicloviassp"][0]["Features"].stringValue
-////    let long = lineCoordinates["cicloviassp"][0]["long"].stringValue
-//    CLLocationCoordinate2D(latitude: Double(ciclo)!)
-//    
-// Ciclo -> Feature -> geometry -> Geometry -> coordinates
+    @State var showMapAlert = true
     
     
     //trazer o array do json para ca
@@ -58,9 +52,12 @@ struct ContentView: View {
     
         ZStack {
             
-//            Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true).ignoresSafeArea()
-//
-            MapView(region: region, lineCoordinates: lineCoordinates, locationManager: $locationManager, showMapAlert: $showMapAlert).ignoresSafeArea()
+            MapView(region: region, lineCoordinates: lineCoordinates, locationManager: $locationManager, showMapAlert: $showMapAlert).ignoresSafeArea().onAppear {
+                observeCoordinateUpdates()
+                observeLocationAccessDenied()
+                deviceLocationService.requestLocationUpdates()
+            }
+
         
         
         
@@ -84,12 +81,18 @@ struct ContentView: View {
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
             Button(action:  {
+                if viewModel.requestAllowOnceLocationPermission() != viewModel.requestAllowOnceLocationPermission() {
+                    viewModel.requestAllowOnceLocationPermission()
+                }
+                else {
+                    showMapAlert = true
+                }
+            
+          
+//
 
-              viewModel.requestAllowOnceLocationPermission()
-//                else {
-//                    //fazer notificacao ->
-//                    print("asd")
-//                }
+                
+
             },label: {
                 Label {
                     Text("")
@@ -133,26 +136,16 @@ struct ContentView: View {
                                 }
                             }
                         }
-                        
-                    }))
-            }.onAppear {
-                observeCoordinateUpdates()
-                observeLocationAccessDenied()
-                deviceLocationService.requestLocationUpdates()
-
-                let firsLocation = CLLocation(latitude:coordinates.lat, longitude: coordinates.lon)
-                let secondLocation = CLLocation(latitude: -23.6825, longitude: -46.6885)
-                
-                let distance = String(firsLocation.distance(from: secondLocation) / 10000)
-                print(distance)
-
+                }))
             }
+        } .alert(isPresented: $showMapAlert) { // 4
             
-            
-            
+            Alert(title: Text("O app funciona melhor com os Serviços de Localização ativados."),
+                           message: Text("Nós precisamos da sua localização para funcionamento do APP, entre em Ajustes e permita a localização"),
+                           primaryButton: .cancel(Text("Manter Serviços de Localização Desativados.")),
+                           secondaryButton: .default(Text("Ativar nos Ajustes"),
+                                                     action: { self.goToDeviceSettings() }))
         }
-        
-        
     }
     func didDismiss() {
         // Handle the dismissing action.
@@ -236,14 +229,10 @@ struct BlurShape: UIViewRepresentable {
     }
     
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//
-//            ContentView()
-//                .previewInterfaceOrientation(.portrait)
-//        }
-//    }
-//}
-
+extension ContentView {
+  ///Path to device settings if location is disabled
+  func goToDeviceSettings() {
+    guard let url = URL.init(string: UIApplication.openSettingsURLString) else { return }
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+  }
+}

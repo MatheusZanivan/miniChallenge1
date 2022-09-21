@@ -20,6 +20,7 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     
     //Requisitando a localizacao do usuário
     public func requestAllowOnceLocationPermission() {
+        
         locationManager.requestLocation()
     }
     

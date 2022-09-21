@@ -80,7 +80,7 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
           @unknown default:
             break
           }
-        parent.locationManager.startUpdatingLocation()
+//        parent.locationManager.startUpdatingLocation()
         }
     
   
