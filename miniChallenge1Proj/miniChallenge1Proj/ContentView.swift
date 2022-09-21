@@ -28,10 +28,7 @@ struct ContentView: View {
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
     @State var locationManager = CLLocationManager()
-    @State var showMapAlert = true
-    
-    
-    //trazer o array do json para ca
+    @State  private var showMapAlert = false
     @State private var lineCoordinates = [
 
       // Steve Jobs theatre
@@ -45,7 +42,7 @@ struct ContentView: View {
     ];
     
     
-        @State var region = MKCoordinateRegion(
+        @State private var region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
             span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))
     var body: some View {
@@ -100,7 +97,11 @@ struct ContentView: View {
                     Image(systemName: "location").frame(width: 40.0, height: 40.0).background(.white).foregroundColor(.gray).cornerRadius(5)
                 }
                 
-            }).position(x: screenW * 0.93, y: screenH * 0.1)
+//
+                
+            },label: {
+                    Image(systemName: "location").frame(width: 40.0, height: 40.0).background(.white).foregroundColor(.gray).cornerRadius(5)
+                }).position(x: screenW * 0.93, y: screenH * 0.1)
             GeometryReader {
                 reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 90)
                     .offset(y: offset)
@@ -147,6 +148,7 @@ struct ContentView: View {
                                                      action: { self.goToDeviceSettings() }))
         }
     }
+ 
     func didDismiss() {
         // Handle the dismissing action.
     }
