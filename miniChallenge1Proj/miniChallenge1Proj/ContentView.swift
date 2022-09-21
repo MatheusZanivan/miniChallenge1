@@ -28,16 +28,7 @@ struct ContentView: View {
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
     @State var locationManager = CLLocationManager()
-    @State var showMapAlert = false
-    
-//    let ciclo = lineCoordinates["cicloviassp"][0]["Features"].stringValue
-////    let long = lineCoordinates["cicloviassp"][0]["long"].stringValue
-//    CLLocationCoordinate2D(latitude: Double(ciclo)!)
-//    
-// Ciclo -> Feature -> geometry -> Geometry -> coordinates
-    
-    
-    //trazer o array do json para ca
+    @State  private var showMapAlert = false
     @State private var lineCoordinates = [
 
       // Steve Jobs theatre
@@ -51,7 +42,7 @@ struct ContentView: View {
     ];
     
     
-        @State var region = MKCoordinateRegion(
+        @State private var region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012),
             span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))
     var body: some View {
@@ -60,10 +51,11 @@ struct ContentView: View {
             
 //            Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon), span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))), showsUserLocation: true).ignoresSafeArea()
 //
-            MapView(region: region, lineCoordinates: lineCoordinates, locationManager: $locationManager, showMapAlert: $showMapAlert).ignoresSafeArea()
-        
-        
-        
+            MapView(region: region, lineCoordinates: lineCoordinates, locationManager: $locationManager, showMapAlert: $showMapAlert).onAppear {
+                                observeCoordinateUpdates()
+                                observeLocationAccessDenied()
+                                deviceLocationService.requestLocationUpdates()
+                            }
           
             Button(action: {
                 isShowingSheet = true
@@ -84,20 +76,24 @@ struct ContentView: View {
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
             Button(action:  {
-
-              viewModel.requestAllowOnceLocationPermission()
-//                else {
-//                    //fazer notificacao ->
-//                    print("asd")
-//                }
-            },label: {
-                Label {
-                    Text("")
-                } icon: {
-                    Image(systemName: "location").frame(width: 40.0, height: 40.0).background(.white).foregroundColor(.gray).cornerRadius(5)
+                if viewModel.requestAllowOnceLocationPermission() == nil {
+                    viewModel.requestAllowOnceLocationPermission()
+                }else {
+              
+                    MapView(region: region, lineCoordinates: lineCoordinates, locationManager: $locationManager, showMapAlert: $showMapAlert).alert(isPresented: $showMapAlert ){
+                        Alert(title: Text("Location access denied"),
+                                     message: Text("Your location is needed"),
+                                     primaryButton: .cancel(),
+                                     secondaryButton: .default(Text("Settings"),
+                                                               action: { self.goToDeviceSettings() }))
+                    }
                 }
                 
-            }).position(x: screenW * 0.93, y: screenH * 0.1)
+//
+                
+            },label: {
+                    Image(systemName: "location").frame(width: 40.0, height: 40.0).background(.white).foregroundColor(.gray).cornerRadius(5)
+                }).position(x: screenW * 0.93, y: screenH * 0.1)
             GeometryReader {
                 reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 90)
                     .offset(y: offset)
@@ -135,25 +131,15 @@ struct ContentView: View {
                         }
                         
                     }))
-            }.onAppear {
-                observeCoordinateUpdates()
-                observeLocationAccessDenied()
-                deviceLocationService.requestLocationUpdates()
-
-                let firsLocation = CLLocation(latitude:coordinates.lat, longitude: coordinates.lon)
-                let secondLocation = CLLocation(latitude: -23.6825, longitude: -46.6885)
-                
-                let distance = String(firsLocation.distance(from: secondLocation) / 10000)
-                print(distance)
-
             }
-            
+
             
             
         }
         
         
     }
+ 
     func didDismiss() {
         // Handle the dismissing action.
     }
@@ -237,13 +223,10 @@ struct BlurShape: UIViewRepresentable {
     
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//
-//            ContentView()
-//                .previewInterfaceOrientation(.portrait)
-//        }
-//    }
-//}
-
+extension ContentView {
+  ///Path to device settings if location is disabled
+  func goToDeviceSettings() {
+    guard let url = URL.init(string: UIApplication.openSettingsURLString) else { return }
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+  }
+}

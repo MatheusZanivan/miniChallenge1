@@ -17,10 +17,10 @@ struct MapView: UIViewRepresentable {
     
      @Binding var locationManager: CLLocationManager
      @Binding var showMapAlert: Bool
-       let mapView = MKMapView()
+    let mapView = MKMapView()
     
   func makeUIView(context: Context) -> MKMapView {
-      mapView.delegate = context.coordinator
+    mapView.delegate = context.coordinator
     locationManager.delegate = context.coordinator
 
       mapView.region = region
@@ -35,14 +35,14 @@ struct MapView: UIViewRepresentable {
   func updateUIView(_ view: MKMapView, context: Context) {
     //  fazendo agora 21/09
       mapView.showsUserLocation = true
-      mapView.userTrackingMode = .follow
+      //mapView.userTrackingMode = .follow
 
       
       let coordinate = CLLocationCoordinate2D(latitude:-23.6699, longitude: -46.7012)
       let span = MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
       let region = MKCoordinateRegion(center: view.userLocation.location?.coordinate ?? coordinate, span: span)
       view.setRegion(region, animated: true)
-      print("ola familia")
+      
 
   }
 
@@ -61,29 +61,7 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
   }
     
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-          switch status {
-          case .restricted:
-            break
-          case .denied:
-            parent.showMapAlert.toggle()
-            return
-          case .notDetermined:
-              parent.locationManager.requestWhenInUseAuthorization()
-            return
-          case .authorizedWhenInUse:
-            return
-          case .authorizedAlways:
-              parent.locationManager.allowsBackgroundLocationUpdates = true
-              parent.locationManager.pausesLocationUpdatesAutomatically = false
-            return
-          @unknown default:
-            break
-          }
-        parent.locationManager.startUpdatingLocation()
-        }
-    
-  
+
        
 
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
@@ -98,3 +76,4 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
   }
     
 }
+

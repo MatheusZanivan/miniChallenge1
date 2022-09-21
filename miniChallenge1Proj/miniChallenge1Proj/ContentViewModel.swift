@@ -27,7 +27,7 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latesLocation = locations.first else {
             return
-        
+//            print("alo familia")
         }
         
         DispatchQueue.main.async {
@@ -37,6 +37,6 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print (error.localizedDescription)
+        print (error.localizedDescription)
    }
 }
