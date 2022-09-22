@@ -11,9 +11,9 @@ import CoreLocation
 
 struct MapView: UIViewRepresentable {
     //21/09
-
+   var cicloSP: Ciclo = Ciclo.ciclovias
   let region: MKCoordinateRegion
-  let lineCoordinates: [CLLocationCoordinate2D]
+  @Binding var lineCoordinates: [CLLocationCoordinate2D]
     
      @Binding var locationManager: CLLocationManager
      @Binding var showMapAlert: Bool
@@ -24,10 +24,12 @@ struct MapView: UIViewRepresentable {
     locationManager.delegate = context.coordinator
 
       mapView.region = region
-      
-
-    let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
-    mapView.addOverlay(polyline)
+      coordenadas().self
+      if lineCoordinates.isEmpty == false {
+          let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+          mapView.addOverlay(polyline)
+      }
+    
 
     return mapView
   }
@@ -49,9 +51,25 @@ struct MapView: UIViewRepresentable {
   func makeCoordinator() -> Coordinator {
       return Coordinator(self)
   }
+    func coordenadas() {
+        
+        for feature in cicloSP.features{
+            for cordinate in feature.geometry.coordinates{
+                let lat = cordinate[1]
+                let lon = cordinate[0]
+                let localizacao = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                lineCoordinates.append(localizacao)
+       
+//       lineCoordinates.append(CLLocationCoordinate2D(latitude: -23.6699, longitude: -46.7012))
+//        lineCoordinates.append(CLLocationCoordinate2D(latitude: -23.6799, longitude: -46.7212))
+//        lineCoordinates.append(CLLocationCoordinate2D(latitude: -23.7099, longitude: -46.7512))
+       
+           }
+        }
+    }
 
-}
 
+    
 
 class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     
@@ -77,3 +95,4 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     
 }
 
+}

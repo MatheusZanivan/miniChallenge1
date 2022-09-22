@@ -16,7 +16,7 @@ struct ContentView: View {
     @StateObject var deviceLocationService = DeviceLocationService.shared
     @State var tokens: Set<AnyCancellable> = []
     @State var coordinates: (lat: Double, lon: Double) = (0,0)
-   private var cicloSP: Ciclo = Ciclo.ciclovias
+    private var cicloSP: Ciclo = Ciclo.ciclovias
     let screenW = UIScreen.main.bounds.size.width
     let screenH = UIScreen.main.bounds.size.height
     //mostra sheet view
@@ -26,21 +26,7 @@ struct ContentView: View {
     @State var location: CGPoint = CGPoint(x:0,y:0)
     @State var locationManager = CLLocationManager()
     @State  private var showMapAlert = false
-    
-    @State private var lineCoordinates = [
-    CLLocationCoordinate2D(latitude: lat, longitude: teste)
-//    [
-//
-//
-//
-//
-//
-//        // Caffè Macs
-//        CLLocationCoordinate2D(latitude: -23.6307354, longitude: -46.7377035),
-//
-//        // Apple wellness center
-//        CLLocationCoordinate2D(latitude: -23.631134, longitude:  -46.7372572)
-    ];
+    var lineCoordinates: [CLLocationCoordinate2D]  = []
     
     
     @State private var region = MKCoordinateRegion(
@@ -51,13 +37,13 @@ struct ContentView: View {
         ZStack {
             
             MapView(region: region, lineCoordinates: lineCoordinates, locationManager: $locationManager, showMapAlert: $showMapAlert).ignoresSafeArea().onAppear {
-              
+                
                 observeCoordinateUpdates()
                 observeLocationAccessDenied()
                 deviceLocationService.requestLocationUpdates()
                 
             }
-
+            
             Button(action: {
                 isShowingSheet = true
                 
@@ -77,16 +63,16 @@ struct ContentView: View {
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
             Button(action:  {
-               
+                
                 if showMapAlert == false {
                     viewModel.requestAllowOnceLocationPermission()
-
-                  
+                    
+                    
                 }else {
                     showMapAlert = true
                 }
-                    
-              
+                
+                
                 
             },label: {
                 Label {
@@ -94,8 +80,8 @@ struct ContentView: View {
                 } icon: {
                     Image(systemName: "location").frame(width: 40.0, height: 40.0).background(.white).foregroundColor(.gray).cornerRadius(5)
                 }
-            
-                   }).position(x: screenW * 0.93, y: screenH * 0.1)
+                
+            }).position(x: screenW * 0.93, y: screenH * 0.1)
             GeometryReader {
                 reader in BottomSheet().offset(y: reader.frame(in:  .global).height - 90)
                     .offset(y: offset)
@@ -167,21 +153,10 @@ struct ContentView: View {
             }
             .store(in: &tokens)
     }
-    func coordenadas() -> CLLocationCoordinate2D{
-//        var aux: [CLLocationCoordinate2D] = []
-        for feature in cicloSP.features{
-            for cordinate in feature.geometry.coordinates{
-                let lat = cordinate[1]
-                let lon = cordinate[0]
-                let localizacao = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                print(localizacao)
-                lineCoordinates.append(localizacao)
-            }
-        }
-return lineCoordinates
-    }
-
+    
 }
+
+
 
 struct ShowLicenseAgreement: View {
     let screenW = UIScreen.main.bounds.size.width
