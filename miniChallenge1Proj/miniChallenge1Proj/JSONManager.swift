@@ -10,7 +10,9 @@ import SwiftUI
 import MapKit
 //import UIKit
 
-
+struct ResponseData: Decodable {
+    var person: [Ciclo]
+}
 // MARK: - Welcome
 struct Ciclo: Codable {
     let features: [Feature]
@@ -56,23 +58,7 @@ enum PropertiesType: String, Codable {
 enum FeatureType: String, Codable {
     case feature = "Feature"
 }
-////
-//struct MapOverlayer {
-//    var overlay: MKOverlay
-//    var polylineInfo: Ciclo
-//}
-//guardando a forma overlay
-//class MapOverlays {
-//
-//    private var overlayList = [MapOverlayer]()
-//    static var shared = MapOverlays()
-//
-//    func addOverlay(mapOverlayer: MapOverlayer) {
-//        MapOverlays.shared.overlayList.append(mapOverlayer)
-//    }
-//    func returnOverlay() -> [MapOverlayer] {
-//        return MapOverlays.shared.overlayList
-//    }
+
     //func pra renderizar para ser usada na funcao de load(decode)
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
@@ -102,17 +88,18 @@ func changePolyline(newPolyline: Ciclo) {
  }
 }
 
+//func parse(jsonData: Data) -> Ciclo? {
+//    do {
+//        let decodedData = try JSONDecoder().decode(Ciclo.self, from: jsonData)
+//        return decodedData
+//    } catch {
+//        print("error: \(error)")
+//    }
+//    return nil
+//}
 // Extension to decode JSON locally
 extension Bundle {
-    // pra renderizar
-//    func render(overlay: MKOverlay, info: Any?) {
-//        if let polylineInfo = info as? Ciclo {
-//            overlayer.shared.changePolyline(newPolyline: polylineInfo)
-//        }
-////        let newMapOverlay = MapOverlayer(overlay: overlay, polylineInfo: overlayer.shared.polylineInfo)
-////        MapOverlays.shared.addOverlay(mapOverlayer: newMapOverlay)
-////
-////    }
+ 
     // funcao completa para carregar, ler e desenhar a Forma de polyline
     func decode<T: Decodable>(file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {
@@ -130,27 +117,21 @@ extension Bundle {
         }
         print(loadedData)
         
-//        for item in geoJson {
-//            if let feature = item as? MKGeoJSONFeature {
-//                let geometry = feature.geometry.first
-//                let propData = feature.properties!
-//                if let polyline = geometry as? MKPolyline {
-//                    let polylineInfo = try? JSONDecoder.init().decode(Ciclo.self, from: propData)
-//                    //call render function pra forma
-//                    self.render(overlay: polyline, info: polylineInfo)
-//                }
-//                for geo in feature.geometry {
-//                    if let polyline = geo as? MKPolyline {
-//                        overlays.append(polyline)
-//                    }
-//                }
-//                
-//            }
-//        }
-//
         return loadedData
     }
     
     
 }
 
+//func readLocalJSONFile(forName name: String) -> Data? {
+//    do {
+//        if let filePath = Bundle.main.path(forResource: name, ofType: "geojson") {
+//            let fileUrl = URL(fileURLWithPath: filePath)
+//            let data = try Data(contentsOf: fileUrl)
+//            return data
+//        }
+//    } catch {
+//        print("error: \(error)")
+//    }
+//    return nil
+//}
