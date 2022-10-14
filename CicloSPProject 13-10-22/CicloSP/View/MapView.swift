@@ -59,7 +59,6 @@ public struct MapView: UIViewRepresentable {
             locationManager.startUpdatingLocation()
             
 //            CalculaDistancia().calculaDistancia(localizacaoDoUsuario: locationStore.phoneLocation.location)
-            print(locationStore.phoneLocation.location)
         }
         return mapView
     }

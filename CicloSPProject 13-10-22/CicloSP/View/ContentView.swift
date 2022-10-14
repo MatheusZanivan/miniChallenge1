@@ -9,13 +9,13 @@ struct ContentView: View{
     @State var offset: CGFloat = 0
     @State var translation: CGSize = CGSize(width: 0, height: 0)
     @State var location: CGPoint = CGPoint(x:0,y:0)
+    @State  private var showMapAlert = false
     
     //verifica o estado da tela
     @State private var isShowingSheet = false
     
     // cria uma variavel que quando o valor é alterado, altera em todas as outras views
     @EnvironmentObject var locationStore : LocationStore
-    
     var selectedLocation:MapLocation
     
     var body: some View {
@@ -32,7 +32,7 @@ struct ContentView: View{
                 Label {
                     Text("")
                 } icon: {
-                    if #available(iOS 15.0, *) {
+                    if #available(iOS 14.0, *) {
                         Image(systemName: "info.circle").foregroundColor(Color(red: 0.39215686274509803, green: 0.34509803921568627, blue: 0.792156862745098)).frame(width: 40.0, height: 40.0).background(.white).cornerRadius(5)
                     } else {
                         // Fallback on earlier versions
@@ -48,13 +48,18 @@ struct ContentView: View{
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
             Button(action:{
-                mapView.centerCoordinate = locationStore.phoneLocation.location.coordinate
-                
+                if (CLLocationManager.locationServicesEnabled()){
+                    
+                    mapView.centerCoordinate = locationStore.phoneLocation.location.coordinate
+                }else {
+                    showMapAlert = true
+                }
+
             },label: {
                 Label {
                     Text("")
                 } icon: {
-                    if #available(iOS 15.0, *) {
+                    if #available(iOS 14.0, *) {
                         Image(systemName: "location.fill").foregroundColor(Color(red: 0.39215686274509803, green: 0.34509803921568627, blue: 0.792156862745098)).frame(width: 40.0, height: 40.0).background(.white).cornerRadius(5)
                     } else {
                         // Fallback on earlier versions
@@ -101,10 +106,16 @@ struct ContentView: View{
                     }))
             }
           
-        }
-    
-    }
+        }.alert(isPresented: $showMapAlert) { // 4
+                    Alert(title: Text("O app funciona melhor com os Serviços de Localização ativados."),
+                          message: Text("Nós precisamos da sua localização para funcionamento do APP, entre em Ajustes e permita a localização"),
+                          primaryButton: .cancel(Text("Manter Serviços de Localização Desativados.")),
+                          secondaryButton: .default(Text("Ativar nos Ajustes"),
+                                                    action: { self.goToDeviceSettings() }))
+                }
+            }
 }
+
 
 
 func didDismiss() {
@@ -140,4 +151,11 @@ class LocationStore : ObservableObject{
     //colocar o marco 0, logo se nao tiver localizacao o usuário aparecera no meio de SP
     //-23.54804881474109, -46.63404710273852
     @Published var phoneLocation : MapLocation = .init(title: "", location: .init(latitude: -23.54804881474109, longitude: -46.63404710273852))
+}
+
+    extension ContentView {
+        func goToDeviceSettings() {
+            guard let url = URL.init(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
 }
