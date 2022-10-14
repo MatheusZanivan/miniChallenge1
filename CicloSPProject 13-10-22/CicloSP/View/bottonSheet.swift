@@ -13,7 +13,7 @@ struct BottomSheet: View {
         request.source = MKMapItem(placemark: start)
         request.destination = MKMapItem(placemark: end)
        
-        request.transportType = .automobile
+        request.transportType = .walking
        
         
         let directions = MKDirections(request: request)
