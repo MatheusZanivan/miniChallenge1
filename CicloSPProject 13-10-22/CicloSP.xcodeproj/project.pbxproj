@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3B54865B28F498E700CFC8B5 /* bottonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B54865A28F498E700CFC8B5 /* bottonSheet.swift */; };
+		3B87C4D828E11E4C0029CEA6 /* CicloSPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87C4D728E11E4C0029CEA6 /* CicloSPApp.swift */; };
+		3B87C4DA28E11E4C0029CEA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87C4D928E11E4C0029CEA6 /* ContentView.swift */; };
+		3B87C4DC28E11E4E0029CEA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B87C4DB28E11E4E0029CEA6 /* Assets.xcassets */; };
+		3B87C4DF28E11E4E0029CEA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B87C4DE28E11E4E0029CEA6 /* Preview Assets.xcassets */; };
+		3BA0028528E22A1400A3F566 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA0028428E22A1400A3F566 /* LaunchScreen.swift */; };
+		3BED14E928E11FF1007F0368 /* BikePathsSP.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3BED14E728E11FF1007F0368 /* BikePathsSP.geojson */; };
+		3BED14EA28E11FF1007F0368 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BED14E828E11FF1007F0368 /* JsonManager.swift */; };
+		3BED14EC28E1245F007F0368 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BED14EB28E1245F007F0368 /* MapView.swift */; };
+		3BED14F428E17347007F0368 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BED14F328E17347007F0368 /* MapKit.framework */; };
+		3BED14F628E175B9007F0368 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BED14F528E175B9007F0368 /* MapAnnotation.swift */; };
+		3BED14F828E175E0007F0368 /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BED14F728E175E0007F0368 /* MapLocation.swift */; };
+		3BF28BE528E3BDA10035DAB0 /* CalculaDistancia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF28BE428E3BDA10035DAB0 /* CalculaDistancia.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3B54865A28F498E700CFC8B5 /* bottonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bottonSheet.swift; sourceTree = "<group>"; };
+		3B87C4D428E11E4C0029CEA6 /* CicloSP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CicloSP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B87C4D728E11E4C0029CEA6 /* CicloSPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CicloSPApp.swift; sourceTree = "<group>"; };
+		3B87C4D928E11E4C0029CEA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3B87C4DB28E11E4E0029CEA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3B87C4DE28E11E4E0029CEA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3BA0028428E22A1400A3F566 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		3BED14E728E11FF1007F0368 /* BikePathsSP.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BikePathsSP.geojson; sourceTree = "<group>"; };
+		3BED14E828E11FF1007F0368 /* JsonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
+		3BED14EB28E1245F007F0368 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		3BED14F128E17347007F0368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3BED14F328E17347007F0368 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3BED14F528E175B9007F0368 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
+		3BED14F728E175E0007F0368 /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
+		3BF28BE428E3BDA10035DAB0 /* CalculaDistancia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculaDistancia.swift; path = ../ViewModel/CalculaDistancia.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3B87C4D128E11E4C0029CEA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BED14F428E17347007F0368 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3B87C4CB28E11E4C0029CEA6 = {
+			isa = PBXGroup;
+			children = (
+				3B87C4D628E11E4C0029CEA6 /* CicloSP */,
+				3B87C4D528E11E4C0029CEA6 /* Products */,
+				3BED14F228E17347007F0368 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3B87C4D528E11E4C0029CEA6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B87C4D428E11E4C0029CEA6 /* CicloSP.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3B87C4D628E11E4C0029CEA6 /* CicloSP */ = {
+			isa = PBXGroup;
+			children = (
+				3BED14F128E17347007F0368 /* Info.plist */,
+				3B87C4E728E11E6D0029CEA6 /* ViewModel */,
+				3B87C4E628E11E670029CEA6 /* View */,
+				3B87C4E528E11E600029CEA6 /* Model */,
+				3B87C4DB28E11E4E0029CEA6 /* Assets.xcassets */,
+				3B87C4DD28E11E4E0029CEA6 /* Preview Content */,
+			);
+			path = CicloSP;
+			sourceTree = "<group>";
+		};
+		3B87C4DD28E11E4E0029CEA6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3B87C4DE28E11E4E0029CEA6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3B87C4E528E11E600029CEA6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3BF28BE428E3BDA10035DAB0 /* CalculaDistancia.swift */,
+				3BED14E828E11FF1007F0368 /* JsonManager.swift */,
+				3BED14E728E11FF1007F0368 /* BikePathsSP.geojson */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3B87C4E628E11E670029CEA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3B87C4D728E11E4C0029CEA6 /* CicloSPApp.swift */,
+				3BED14EB28E1245F007F0368 /* MapView.swift */,
+				3B87C4D928E11E4C0029CEA6 /* ContentView.swift */,
+				3BA0028428E22A1400A3F566 /* LaunchScreen.swift */,
+				3B54865A28F498E700CFC8B5 /* bottonSheet.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3B87C4E728E11E6D0029CEA6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3BED14F528E175B9007F0368 /* MapAnnotation.swift */,
+				3BED14F728E175E0007F0368 /* MapLocation.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3BED14F228E17347007F0368 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BED14F328E17347007F0368 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3B87C4D328E11E4C0029CEA6 /* CicloSP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B87C4E228E11E4E0029CEA6 /* Build configuration list for PBXNativeTarget "CicloSP" */;
+			buildPhases = (
+				3B87C4D028E11E4C0029CEA6 /* Sources */,
+				3B87C4D128E11E4C0029CEA6 /* Frameworks */,
+				3B87C4D228E11E4C0029CEA6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CicloSP;
+			productName = CicloSP;
+			productReference = 3B87C4D428E11E4C0029CEA6 /* CicloSP.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3B87C4CC28E11E4C0029CEA6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					3B87C4D328E11E4C0029CEA6 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 3B87C4CF28E11E4C0029CEA6 /* Build configuration list for PBXProject "CicloSP" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3B87C4CB28E11E4C0029CEA6;
+			productRefGroup = 3B87C4D528E11E4C0029CEA6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3B87C4D328E11E4C0029CEA6 /* CicloSP */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3B87C4D228E11E4C0029CEA6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B87C4DF28E11E4E0029CEA6 /* Preview Assets.xcassets in Resources */,
+				3B87C4DC28E11E4E0029CEA6 /* Assets.xcassets in Resources */,
+				3BED14E928E11FF1007F0368 /* BikePathsSP.geojson in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3B87C4D028E11E4C0029CEA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BA0028528E22A1400A3F566 /* LaunchScreen.swift in Sources */,
+				3BF28BE528E3BDA10035DAB0 /* CalculaDistancia.swift in Sources */,
+				3B54865B28F498E700CFC8B5 /* bottonSheet.swift in Sources */,
+				3BED14F828E175E0007F0368 /* MapLocation.swift in Sources */,
+				3BED14EA28E11FF1007F0368 /* JsonManager.swift in Sources */,
+				3BED14EC28E1245F007F0368 /* MapView.swift in Sources */,
+				3B87C4DA28E11E4C0029CEA6 /* ContentView.swift in Sources */,
+				3B87C4D828E11E4C0029CEA6 /* CicloSPApp.swift in Sources */,
+				3BED14F628E175B9007F0368 /* MapAnnotation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3B87C4E028E11E4E0029CEA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3B87C4E128E11E4E0029CEA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3B87C4E328E11E4E0029CEA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CicloSP/Preview Content\"";
+				DEVELOPMENT_TEAM = 55AU2SQW7Z;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CicloSP/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "\"Esse aplicativo utiliza a sua localização para carregar o mapa\"";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "CicloSP \"Deseja utilizar a sua localização \"";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "MatheusZanivan-com.github.CicloSP11082001";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3B87C4E428E11E4E0029CEA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CicloSP/Preview Content\"";
+				DEVELOPMENT_TEAM = 55AU2SQW7Z;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CicloSP/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "\"Esse aplicativo utiliza a sua localização para carregar o mapa\"";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "CicloSP \"Deseja utilizar a sua localização \"";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "MatheusZanivan-com.github.CicloSP11082001";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3B87C4CF28E11E4C0029CEA6 /* Build configuration list for PBXProject "CicloSP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B87C4E028E11E4E0029CEA6 /* Debug */,
+				3B87C4E128E11E4E0029CEA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3B87C4E228E11E4E0029CEA6 /* Build configuration list for PBXNativeTarget "CicloSP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B87C4E328E11E4E0029CEA6 /* Debug */,
+				3B87C4E428E11E4E0029CEA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3B87C4CC28E11E4C0029CEA6 /* Project object */;
+}
