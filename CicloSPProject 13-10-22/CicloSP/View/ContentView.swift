@@ -17,14 +17,18 @@ struct ContentView: View{
     // cria uma variavel que quando o valor é alterado, altera em todas as outras views
     @EnvironmentObject var locationStore : LocationStore
     var selectedLocation:MapLocation
-    
+
     var body: some View {
         ZStack{
             MapView(mapView)
                 .ignoresSafeArea()
-                .onAppear(){
+                .onChange(of: locationStore.phoneLocation.location){ _ in 
+                  
                     mapView.centerCoordinate = locationStore.phoneLocation.location.coordinate
+                        
                 }
+          
+                    
             Button(action: {
                 isShowingSheet = true
                 
@@ -48,13 +52,19 @@ struct ContentView: View{
             }.position(x: screenW * 0.93, y: screenH * 0.05)
             
             Button(action:{
-                if (CLLocationManager.locationServicesEnabled()){
-                    
-                    mapView.centerCoordinate = locationStore.phoneLocation.location.coordinate
-                }else {
+                switch CLLocationManager.authorizationStatus() {
+                case .denied:
                     showMapAlert = true
+                case .authorizedAlways:
+                        mapView.centerCoordinate = locationStore.phoneLocation.location.coordinate
+                        
+                case .authorizedWhenInUse:
+                    
+                        mapView.centerCoordinate = locationStore.phoneLocation.location.coordinate
+                        
+                @unknown default:
+                    break
                 }
-
             },label: {
                 Label {
                     Text("")
@@ -147,10 +157,12 @@ struct ShowLicenseAgreement: View {
 
 class LocationStore : ObservableObject{
     //
+    var num = 1
     @Published var selectedLocation : MapLocation = .init(title: "", location: .init(latitude: 0.0, longitude: 0.0))
     //colocar o marco 0, logo se nao tiver localizacao o usuário aparecera no meio de SP
     //-23.54804881474109, -46.63404710273852
     @Published var phoneLocation : MapLocation = .init(title: "", location: .init(latitude: -23.54804881474109, longitude: -46.63404710273852))
+ 
 }
 
     extension ContentView {

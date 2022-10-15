@@ -1,5 +1,6 @@
 import Foundation
 import MapKit
+import SwiftUI
 
 
 // objeto que faz as anotacoes no mapa , pega location , titulo e a coordenada
@@ -8,7 +9,7 @@ public class MapAnnotation: NSObject,MKAnnotation, Identifiable{
     public var title: String?
     public var subtitle: String?
     public var coordinate: CLLocationCoordinate2D
-    public var iconName: String
+    public var iconName: Image
     
     
     
@@ -17,7 +18,7 @@ public class MapAnnotation: NSObject,MKAnnotation, Identifiable{
         self.location = location
         self.title = location.title
         self.coordinate = location.location.coordinate
-        self.iconName = iconName
+        self.iconName =  Image(systemName: "bicycle.circle")
         
         
         super.init()
@@ -29,7 +30,7 @@ public class MapAnnotation: NSObject,MKAnnotation, Identifiable{
         self.title = location.title
         self.coordinate = location.location.coordinate
         self.subtitle = subtitle
-        self.iconName = iconName
+        self.iconName =  Image(systemName: "bicycle.circle")
         
         
         super.init()

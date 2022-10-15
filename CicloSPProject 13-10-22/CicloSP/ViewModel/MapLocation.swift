@@ -5,7 +5,7 @@ import MapKit
 // aqui criamos as localizacoes que serao carregadas no mapa 
 public class MapLocation: Identifiable, ObservableObject{
     
-    /*@Published*/ public var location: CLLocation
+    public var location: CLLocation
     public var title: String
     
     

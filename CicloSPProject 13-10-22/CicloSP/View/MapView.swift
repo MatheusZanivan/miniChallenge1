@@ -57,8 +57,7 @@ public struct MapView: UIViewRepresentable {
             locationManager.delegate = context.coordinator
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
-            
-//            CalculaDistancia().calculaDistancia(localizacaoDoUsuario: locationStore.phoneLocation.location)
+            locationManager.distanceFilter = 200
         }
         return mapView
     }
@@ -92,7 +91,7 @@ public struct MapView: UIViewRepresentable {
         }
         public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let render = MKPolylineRenderer(overlay: overlay)
-            render.strokeColor = .purple
+            render.strokeColor = .systemPurple
             render.lineWidth = 3
             return render
         }

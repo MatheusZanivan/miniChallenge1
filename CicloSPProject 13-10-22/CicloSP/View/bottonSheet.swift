@@ -19,7 +19,6 @@ struct BottomSheet: View {
         let directions = MKDirections(request: request)
         directions.calculate { response, error in
             guard let route = response?.routes.first else { return }
-            //
             
             mapView.addAnnotations([end])
             mapView.addOverlay(route.polyline)
